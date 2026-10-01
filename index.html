@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5b3fd6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>SATzap</title>
+<style>
+:root{--bg:#f4f3fb;--card:#fff;--text:#16132b;--muted:#625f7a;--line:#dcd9ee;--pur:#5b3fd6;--yel:#ffc800;--grn:#12a15f;--red:#d63c3c;--okbg:#dcf5e8;--badbg:#fbe0e0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12101f;--card:#1d1a30;--text:#eeecfb;--muted:#a29fbd;--line:#322e4d;--okbg:#12362a;--badbg:#3d1d1f}}
+:root[data-theme="dark"]{--bg:#12101f;--card:#1d1a30;--text:#eeecfb;--muted:#a29fbd;--line:#322e4d;--okbg:#12362a;--badbg:#3d1d1f}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45}
+main{max-width:520px;margin:0 auto;padding:16px 16px 40px}
+h1{font-size:2.3rem;font-weight:800;line-height:1.05;margin:6px 0 8px;letter-spacing:-1px}h1 b{color:var(--pur)}
+h2{font-size:1rem;margin:20px 2px 10px}
+.sub{color:var(--muted);margin:0 0 14px}.center{text-align:center}.note{font-size:.78rem;color:var(--muted);margin-top:16px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;touch-action:manipulation;min-height:48px}
+:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+input{width:100%;font:inherit;font-size:16px;color:inherit;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px;margin:4px 0}
+.lab{display:block;font-weight:700;font-size:.9rem;margin:14px 0 6px}
+.go{width:100%;background:var(--yel);color:#16132b;font-weight:800;font-size:1.1rem;padding:14px;margin-top:12px;border-radius:20px;box-shadow:0 4px 0 #c99a00}
+.go:active{transform:translateY(3px);box-shadow:none}
+.go.ghost{background:var(--card);color:var(--text);border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.go.sm{width:auto;font-size:.9rem;padding:8px 16px;min-height:40px;margin:0}
+.lk{background:none;color:var(--muted);font-weight:600;padding:0 4px}
+.av{display:inline-block;border-radius:50%;overflow:hidden;line-height:0;flex:none;box-shadow:0 3px 0 rgba(0,0,0,.12)}.av svg{display:block}
+.hero{text-align:center;padding-top:6vh}
+.hero .logo{display:inline-block;animation:pulse 2.6s ease-in-out infinite;filter:drop-shadow(0 8px 0 rgba(91,63,214,.25))}
+.hero h1{font-size:3.2rem}
+.avrow{display:flex;justify-content:center;margin:14px 0}.avrow .av{margin:0 -6px;border:3px solid var(--bg)}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;text-align:left}
+.feat div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px}.feat i{font-style:normal;font-size:1.5rem}.feat b{display:block}.feat span{font-size:.78rem;color:var(--muted)}
+.sw{display:flex;flex-wrap:wrap;gap:8px}
+.c,.a{border:3px solid transparent;min-height:0}.c{width:40px;height:40px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(0,0,0,.1)}.a{border-radius:50%;padding:0;background:none;line-height:0;overflow:hidden;width:54px;height:54px}
+.c.sel,.a.sel{border-color:var(--pur);box-shadow:0 0 0 2px var(--yel)}
+.ulist{display:flex;flex-direction:column;gap:10px}
+.urow{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:10px 12px;width:100%;text-align:left;box-shadow:0 3px 0 var(--line)}
+.urow b{flex:1}.urow small{color:var(--muted)}.urow.me{border-color:var(--pur)}.urow.sel{border-color:var(--yel)}
+.ob{text-align:center;padding-top:8vh}.ob .big{font-size:5rem}.dots{display:flex;justify-content:center;gap:8px;margin:18px 0}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--pur);width:26px;border-radius:99px}
+.head{display:flex;align-items:center;gap:12px;margin-bottom:6px}.head h1{flex:1;font-size:1.4rem;margin:0}
+.chip{background:var(--card);border:2px solid var(--line);border-radius:99px;padding:6px 12px;font-weight:700;font-size:.9rem}
+.saved{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--pur);color:#fff;border-radius:20px;padding:12px 16px;margin:12px 0;box-shadow:0 4px 0 #3f28a8}.saved span{display:block;font-size:.8rem;opacity:.85}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile,.opt{background:var(--card);border:2px solid var(--line);box-shadow:0 3px 0 var(--line);border-radius:20px}
+.tile:active,.opt:active{transform:translateY(3px);box-shadow:none}
+.tile{padding:14px 12px;text-align:left}.tile i{font-style:normal;font-size:1.6rem;display:block}.tile strong{display:block;font-size:.95rem}.tile span{font-size:.75rem;color:var(--muted)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}.stat b{display:block;font-size:1.3rem}.stat span{font-size:.72rem;color:var(--muted)}
+.bar{height:10px;border-radius:99px;background:var(--line);margin:8px 0 4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--yel);border-radius:99px;transition:width .3s}
+.barl{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:12px}.top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px}.crow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.tag{background:var(--pur);color:#fff;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:99px}
+.bm{background:none;font-size:.85rem;font-weight:600;color:var(--muted);padding:0 6px}.bm.on{color:var(--pur)}
+.q{font-size:1.15rem;font-weight:600;white-space:pre-wrap;overflow-wrap:anywhere}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:12px 14px;margin-bottom:10px;font-size:1.05rem}
+.opt i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:.85rem}
+.opt.ok{background:var(--okbg);border-color:var(--grn);box-shadow:0 3px 0 var(--grn)}.opt.bad{background:var(--badbg);border-color:var(--red);box-shadow:0 3px 0 var(--red)}.opt.dim{opacity:.55}
+.fb{border-radius:16px;padding:12px 14px;margin:4px 0}.fb.ok{background:var(--okbg)}.fb.bad{background:var(--badbg)}.fb small{display:block;margin-top:6px;color:var(--muted)}
+.bigs{font-size:3.4rem;font-weight:800;line-height:1;margin:10px 0}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+.tabs button{flex:1;background:none;font-size:.75rem;font-weight:700;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:0}.tabs button i{font-style:normal;font-size:1.4rem}.tabs button.on{color:var(--pur)}
+.goal{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:12px 14px;margin:10px 0}.gt{display:flex;justify-content:space-between}.gt span{color:var(--muted);font-size:.85rem}.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}.bd{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 2px;text-align:center;font-size:.65rem}.bd i{font-style:normal;font-size:1.6rem;display:block}.bd.off{opacity:.35;filter:grayscale(1)}
+.crown{background:linear-gradient(135deg,#ffd75e,#ff9f1c);color:#3a2600;border-radius:20px;padding:14px;text-align:center;margin-bottom:12px;font-weight:700}
+@keyframes pulse{50%{transform:scale(1.08)}}@media (prefers-reduced-motion:reduce){.hero .logo{animation:none}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+function ri(a,b){return a+Math.floor(Math.random()*(b-a+1))}
+function pk(a){return a[ri(0,a.length-1)]}
+function opts(c,w,f){var u=[];w.concat([c+1,c-1,c+2,c-2,c+3,c+4]).forEach(function(x){if(x!==c&&u.indexOf(x)<0&&(c<0||x>=0))u.push(x)});return [c].concat(u.slice(0,3)).map(function(x){return f?f(x):String(x)})}
+function M(q,c,w,e,f){return{t:"m",q:q,o:opts(c,w,f),a:0,e:e}}
+function sup(n){return String(n).replace(/\d/g,function(d){return "⁰¹²³⁴⁵⁶⁷⁸⁹"[d]})}
+var usd=function(x){return "$"+x},deg=function(x){return x+"°"};
+var GM=[
+function(){var x=ri(2,30),a=ri(2,12),b=ri(1,40),c=a*x+b;return M("If "+a+"x + "+b+" = "+c+", what is the value of x?",x,[c-b,x+1,x-1],"Subtract "+b+" from both sides: "+a+"x = "+(c-b)+". Then divide by "+a+": x = "+x+".")},
+function(){var p=ri(1,19)*5,n=ri(2,60)*20,r=p*n/100;return M("What is "+p+"% of "+n+"?",r,[n-r,r*2,r+5],p+"% of "+n+" = "+p+"/100 × "+n+" = "+r+".")},
+function(){var m=ri(1,9),x1=ri(0,9),dx=ri(1,9),y1=ri(0,15),x2=x1+dx,y2=y1+m*dx;return M("What is the slope of the line through ("+x1+", "+y1+") and ("+x2+", "+y2+")?",m,[m+1,m-1,dx],"Slope = change in y ÷ change in x = ("+y2+" − "+y1+") ÷ ("+x2+" − "+x1+") = "+(m*dx)+" ÷ "+dx+" = "+m+".")},
+function(){var a=ri(1,9),b=ri(1,20)*(Math.random()<.5?-1:1),x=ri(2,9),c=a*x*x+b,s=(b<0?"− ":"+ ")+Math.abs(b),k=a===1?"":a;return M("If f(x) = "+k+"x² "+s+", what is f("+x+")?",c,[a*x*a*x+b,2*a*x+b,a*x*x-b],"Replace x with "+x+": f("+x+") = "+a+"("+(x*x)+") "+s+" = "+c+".")},
+function(){var m=ri(13,40),a=ri(m-5,m+5),b=ri(m-4,m+4),c=ri(m-3,m+3),d=4*m-a-b-c;return M("The mean of 4 numbers is "+m+". Three of the numbers are "+a+", "+b+", and "+c+". What is the fourth number?",d,[m,d+4,d-4],"The total must be 4 × "+m+" = "+(4*m)+". The three known numbers add up to "+(a+b+c)+", so the fourth is "+d+".")},
+function(){var P=ri(1,25)*20,d=pk([10,20,25,50]),c=P*(100-d)/100;return M("A jacket costs $"+P+". It is on sale for "+d+"% off. What is the sale price?",c,[P-d,P*d/100,P+P*d/100],"The discount is "+d+"% of "+P+" = $"+(P*d/100)+". Sale price: "+P+" − "+(P*d/100)+" = $"+c+".",usd)},
+function(){var L=ri(4,40),W=ri(2,L-1),per=Math.random()<.5,t="A rectangle has a length of "+L+" and a width of "+W+". ";return per?M(t+"What is its perimeter?",2*(L+W),[L*W,L+W,2*L+W],"Perimeter = 2 × (length + width) = 2 × ("+L+" + "+W+") = "+(2*(L+W))+"."):M(t+"What is its area?",L*W,[2*(L+W),L+W,L*W+L],"Area = length × width = "+L+" × "+W+" = "+(L*W)+".")},
+function(){var F=ri(2,12)*5,Mo=ri(2,12)*5,n=ri(3,12),c=F+Mo*n;return M("A gym charges a one-time fee of $"+F+" plus $"+Mo+" per month. What is the total cost for "+n+" months?",c,[(F+Mo)*n,F*n+Mo,F*Mo+n],"Fee + monthly cost × months = "+F+" + "+Mo+" × "+n+" = $"+c+".",usd)},
+function(){var a=ri(10,85),b=ri(10,85),c=180-a-b;return M("Two angles of a triangle measure "+a+"° and "+b+"°. What is the measure of the third angle?",c,[a+b,180-a,180-b],"The angles of a triangle add up to 180°. 180 − "+a+" − "+b+" = "+c+".",deg)},
+function(){var s=ri(3,12)*10,T=ri(2,8),H=T+ri(1,8),D=s*T;return M("A train travels "+D+" miles in "+T+" hours at a constant speed. How many miles will it travel in "+H+" hours at that speed?",s*H,[D+H,D*H,s+H],"Speed = "+D+" ÷ "+T+" = "+s+" mph. In "+H+" hours: "+s+" × "+H+" = "+(s*H)+" miles.")},
+function(){var p=ri(1,12),q=ri(p+1,15),S=p+q,Pq=p*q;return M("What is the sum of the solutions of x² − "+S+"x + "+Pq+" = 0?",S,[Pq,S+1,q-p],"It factors as (x − "+p+")(x − "+q+") = 0, so the solutions are "+p+" and "+q+". Their sum is "+S+".")},
+function(){var a=ri(2,12),b=ri(2,12),t=pk([2,3,5,7,10]);return M("If "+t+sup(a)+" · "+t+sup(b)+" = "+t+"ˣ, what is the value of x?",a+b,[a*b,Math.abs(a-b),a+b+1],"When you multiply powers with the same base, you add the exponents: "+a+" + "+b+" = "+(a+b)+".")},
+function(){var x=ri(3,30),y=ri(1,x-1),S=x+y,D=x-y;return M("If x + y = "+S+" and x − y = "+D+", what is the value of x?",x,[y,S-D,S],"Add the two equations: 2x = "+(S+D)+", so x = "+x+".")},
+function(){var a=ri(2,8),b=a+ri(1,4),k=ri(2,12),g=b*k,c=a*k;return M("The ratio of boys to girls in a club is "+a+" to "+b+". There are "+g+" girls. How many boys are in the club?",c,[g,c+k,a+g],"Each part of the ratio is "+g+" ÷ "+b+" = "+k+" students. Boys: "+a+" × "+k+" = "+c+".")},
+function(){var a=ri(2,15),b=ri(1,9),n=ri(2,9),m=ri(2,9),c=a*n+b*m;return M("Notebooks cost $"+a+" each and pens cost $"+b+" each. Sara buys "+n+" notebooks and "+m+" pens. What is the total cost?",c,[a*m+b*n,(a+b)*(n+m),a*n+b+m],"Notebooks: "+a+" × "+n+" = "+(a*n)+". Pens: "+b+" × "+m+" = "+(b*m)+". Total: $"+c+".",usd)},
+function(){var mx=ri(1,20),my=ri(1,20),dx=ri(1,10),dy=ri(1,10),x1=mx-dx,y1=my-dy,x2=mx+dx,y2=my+dy,f=function(p){return "("+p[0]+", "+p[1]+")"};return{t:"m",q:"What is the midpoint of the line segment with endpoints ("+x1+", "+y1+") and ("+x2+", "+y2+")?",o:[[mx,my],[2*mx,2*my],[mx+1,my],[mx,my+1]].map(f),a:0,e:"Average the coordinates: (("+x1+" + "+x2+") ÷ 2, ("+y1+" + "+y2+") ÷ 2) = "+f([mx,my])+"."}},
+function(){var x=ri(1,30),a=ri(2,9),b=ri(1,20),c=a*(x+1)+b;return M("What is the greatest integer x that satisfies "+a+"x + "+b+" < "+c+"?",x,[x+1,x-1,a],"Subtract "+b+": "+a+"x < "+(c-b)+". Divide by "+a+": x < "+(x+1)+". The greatest integer less than "+(x+1)+" is "+x+".")},
+function(){var s=[],i;while(s.length<5){i=ri(1,60);if(s.indexOf(i)<0)s.push(i)}var o=s.slice().sort(function(p,q){return p-q}),md=o[2],mean=Math.round(s.reduce(function(p,q){return p+q},0)/5);return M("What is the median of these numbers? "+s.join(", "),md,[s[2],mean,o[3]],"Put them in order: "+o.join(", ")+". The middle number is "+md+".")},
+function(){var n=ri(1,30),h=ri(2,6),k=ri(2,6),t=h*k,c=n*Math.pow(2,k);return M("A culture starts with "+n+" cells and doubles every "+h+" hours. How many cells are there after "+t+" hours?",c,[n*2*k,n*k,n+Math.pow(2,k)],"In "+t+" hours it doubles "+k+" times: "+n+" × 2"+sup(k)+" = "+c+".")},
+function(){var s=[],i;while(s.length<5)s.push(ri(1,60));var mx=Math.max.apply(0,s),mn=Math.min.apply(0,s);return M("What is the range of these numbers? "+s.join(", "),mx-mn,[mx,mn,mx+mn],"Range = largest − smallest = "+mx+" − "+mn+" = "+(mx-mn)+".")}
+];
+function RW(q,c,w,e){return{t:"r",q:"Which choice completes the text correctly?\n\n"+q,o:[c].concat(w),a:0,e:e}}
+var SG=["The teacher","My cousin","The driver","Each student","Everyone","The microbus","The principal","Our neighbor"],PL=["The teachers","My cousins","The drivers","Both students","The microbuses","The coaches","Our neighbors"],AD=["ready for the test","late today","very tired","proud of the team","sure about the answer","happy with the result","nervous about the exam","early this morning"];
+var VB=[["go","went","gone","goes","Yesterday, Omar ______ to the market.","They have already ______ to the market."],
+["eat","ate","eaten","eats","Last night, Sara ______ dinner at her aunt's house.","We have already ______ lunch."],
+["write","wrote","written","writes","Last week, Karim ______ a long letter.","She has ______ three essays this month."],
+["take","took","taken","takes","This morning, Nour ______ the early bus.","He has ______ the exam twice."],
+["see","saw","seen","sees","On Friday, we ______ a great film.","Have you ever ______ the pyramids?"],
+["speak","spoke","spoken","speaks","Yesterday, the guide ______ to us in English.","She has ______ to the principal."],
+["give","gave","given","gives","The teacher ______ us extra time yesterday.","He has ______ his seat to an older man."],
+["choose","chose","chosen","chooses","Last year, Mona ______ chemistry.","Have you ______ a topic yet?"],
+["begin","began","begun","begins","The class ______ at eight o'clock yesterday.","The exam has ______ already."]];
+var HM=[["their",["there","they're","theirs"],"The students left ______ bags in the hallway.","\"Their\" shows ownership. \"They're\" means \"they are.\""],
+["there",["their","they're","theirs"],"Please put the books over ______, next to the window.","\"There\" points to a place."],
+["they're",["their","there","theirs"],"I think ______ coming to the party tonight.","\"They're\" is short for \"they are.\""],
+["your",["you're","yours","you"],"Don't forget to bring ______ passport.","\"Your\" shows ownership. \"You're\" means \"you are.\""],
+["you're",["your","yours","you"],"I hope ______ ready for the exam.","\"You're\" is short for \"you are.\""],
+["its",["it's","its'","is"],"The company is proud of ______ new design.","\"Its\" shows ownership. \"It's\" means \"it is.\""],
+["it's",["its","its'","is"],"I think ______ going to rain soon.","\"It's\" is short for \"it is.\""],
+["too",["to","two","tow"],"This soup is ______ hot to drink.","\"Too\" means \"more than needed.\""]];
+var VC=[["The mayor's speech was so ______ that even people who disagreed with her listened quietly.","persuasive",["confusing","boring","rude"]],
+["After weeks of drought, the farmers were ______ for rain.","desperate",["careless","amused","uninterested"]],
+["The scientist was ______ in her work, checking every measurement three times.","meticulous",["careless","hasty","lazy"]],
+["Her ______ answer gave us no useful information; it could have meant yes or no.","vague",["precise","detailed","honest"]],
+["The old bridge was too ______ to hold heavy trucks, so engineers closed it.","fragile",["sturdy","modern","wide"]],
+["The team showed great ______ by playing hard even though they were far behind.","perseverance",["laziness","luck","surprise"]],
+["The museum's rare coins are ______; there is nothing else like them in the country.","unique",["common","cheap","ordinary"]],
+["The students were ______ about the trip and could talk about nothing else.","enthusiastic",["bored","afraid","angry"]],
+["The desert is ______; very little rain falls there in a whole year.","arid",["humid","icy","crowded"]],
+["The judge was ______, treating both sides exactly the same.","impartial",["biased","angry","sleepy"]],
+["The movie's ending was ______, and no one in the audience saw it coming.","unexpected",["predictable","boring","long"]],
+["His ______ nature made him share his lunch with anyone who was hungry.","generous",["selfish","shy","strict"]],
+["The explorer's journey was ______, full of storms and long stretches without food.","perilous",["pleasant","brief","ordinary"]],
+["Her claim was later ______ by two independent studies that reached the same result.","confirmed",["contradicted","delayed","imagined"]]];
+var TC=[["Omar practiced every day","he improved quickly"],["It rained heavily","the match was postponed"],["Nora forgot her umbrella","she got wet"],["The shop was closed","we bought dinner elsewhere"],["The battery was empty","the phone shut down"],["Sami studied all week","he felt ready for the exam"]],
+TX=[["The test was very hard","most students passed"],["The hotel was cheap","the rooms were spotless"],["Mina trained hard","she lost the race"],["The bus was crowded","everyone was cheerful"],["The film was long","nobody wanted it to end"],["The recipe looked simple","it took three hours"]];
+var GR=[
+function(){var sing=Math.random()<.5,s=pk(sing?SG:PL),w=sing?"singular":"plural",c;if(Math.random()<.5){c=sing?"is":"are";return RW(s+" ______ "+pk(AD)+".",c,sing?["are","be","been"]:["is","be","been"],"\""+s+"\" is "+w+", so the verb is \""+c+"\".")}c=sing?"has":"have";return RW(s+" ______ been waiting for an hour.",c,sing?["have","is","are"]:["has","is","are"],"\""+s+"\" is "+w+", so use \""+c+" been.\"")},
+function(){var v=pk(VB),A=Math.random()<.5,c=A?v[1]:v[2];return RW(A?v[4]:v[5],c,[v[0],A?v[2]:v[1],v[3]],A?"A time word like \"yesterday\" or \"last night\" points to the simple past: \""+c+"\".":"\"Have\" or \"has\" needs the past participle: \""+c+"\".")},
+function(){var h=pk(HM);return RW(h[2],h[0],h[1],h[3])},
+function(){var v=pk(VC);return RW(v[0],v[1],v[2],"The clues in the sentence point to \""+v[1]+"\".")},
+function(){var c=Math.random()<.5,q=pk(c?TC:TX);return RW(q[0]+". ______, "+q[1]+".",c?"Therefore":"However",c?["However","Meanwhile","For example"]:["Therefore","Likewise","As a result"],c?"The first sentence causes the second, so use \"Therefore.\"":"The two sentences contrast, so use \"However.\"")}
+];
+function G(src,ix){return function(){return src[pk(ix)]()}}
+var TP={
+m:["Math","🧮","All math topics",function(){return pk(GM)()}],
+r:["Reading & Writing","📖","Grammar, words, links",function(){return pk(GR)()}],
+x:["Mixed","🎲","Everything shuffled",function(){return Math.random()<.5?pk(GM)():pk(GR)()}],
+a:["Algebra","🔤","Equations, functions",G(GM,[0,3,10,11,12,16])],
+p:["Percent & Ratio","💯","Discounts, rates, ratios",G(GM,[1,5,13,7,9,14,18])],
+g:["Geometry & Lines","📐","Slope, midpoint, shapes",G(GM,[2,6,8,15])],
+s:["Statistics","📊","Mean, median, range",G(GM,[4,17,19])],
+gr:["Grammar","✍️","Verbs and homophones",G(GR,[0,1,2])],
+vo:["Vocabulary","📚","Words in context",G(GR,[3])],
+tr:["Transitions","🔗","However, therefore…",G(GR,[4])]
+};
+var BG=["#ffd166","#ff8fab","#8ecae6","#95d5b2","#c8b6ff","#ffb38a","#9ae6e0","#f4a6a6"],SK=["#ffe0c2","#f5c9a0","#e0a678","#c68642","#8d5524","#5c3a21"],HC=["#16132b","#5a3825","#a0522d","#e6b34a","#d63c3c","#7c5cff","#cfd2d9"];
+var AO=[["b","Background",BG],["k","Skin",SK],["h","Hair style",6],["hc","Hair colour",HC],["m","Mouth",4],["x","Extras",4]];
+function logo(s){return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 64 64" role="img" aria-label="SATzap logo"><rect width="64" height="64" rx="17" fill="#5b3fd6"/><path d="M37 8 16 36h14l-4 20 22-30H34z" fill="#ffc800"/></svg>'}
+function av(a,s){var sk=SK[a.k],hc=HC[a.hc],d="#16132b",h=a.h,o='<svg viewBox="0 0 100 100" width="'+s+'" height="'+s+'"><rect width="100" height="100" fill="'+BG[a.b]+'"/>';
+if(h==1)o+='<rect x="22" y="28" width="56" height="60" rx="24" fill="'+hc+'"/>';
+if(h==2)o+='<circle cx="50" cy="38" r="31" fill="'+hc+'"/>';
+o+='<path d="M12 100c2-22 18-30 38-30s36 8 38 30z" fill="#5b3fd6"/><rect x="43" y="56" width="14" height="18" rx="6" fill="'+sk+'"/><ellipse cx="50" cy="46" rx="22" ry="25" fill="'+sk+'"/>';
+if(h==0||h==1||h==3)o+='<path d="M27 46c-2-22 10-31 23-31s25 9 23 31c-5-9-13-13-23-13s-18 4-23 13z" fill="'+hc+'"/>';
+if(h==3)o+='<circle cx="50" cy="12" r="9" fill="'+hc+'"/>';
+if(h==4)o+='<path d="M26 44c0-22 11-31 24-31s24 9 24 31z" fill="#d63c3c"/><rect x="20" y="41" width="62" height="7" rx="3.5" fill="#b02a2a"/>';
+o+='<circle cx="35" cy="57" r="4" fill="#ff6b8a" opacity=".3"/><circle cx="65" cy="57" r="4" fill="#ff6b8a" opacity=".3"/><circle cx="41" cy="48" r="2.8" fill="'+d+'"/><circle cx="59" cy="48" r="2.8" fill="'+d+'"/>';
+o+=['<path d="M40 59q10 9 20 0" fill="none" stroke="'+d+'" stroke-width="3" stroke-linecap="round"/>','<path d="M40 58q10 15 20 0z" fill="'+d+'"/>','<path d="M41 61q9 3 18-4" fill="none" stroke="'+d+'" stroke-width="3" stroke-linecap="round"/>','<ellipse cx="50" cy="61" rx="4" ry="5" fill="'+d+'"/>'][a.m];
+if(a.x==1)o+='<g fill="none" stroke="'+d+'" stroke-width="2.5"><circle cx="41" cy="48" r="8"/><circle cx="59" cy="48" r="8"/><path d="M49 48h2"/></g>';
+if(a.x==2)o+='<rect x="31" y="42" width="17" height="11" rx="5" fill="'+d+'"/><rect x="52" y="42" width="17" height="11" rx="5" fill="'+d+'"/><path d="M48 46h4" stroke="'+d+'" stroke-width="3"/>';
+if(a.x==3)o+='<path d="M25 46c0-24 11-33 25-33s25 9 25 33" fill="none" stroke="#ffc800" stroke-width="5"/><rect x="19" y="42" width="10" height="20" rx="5" fill="#ffc800"/><rect x="71" y="42" width="10" height="20" rx="5" fill="#ffc800"/>';
+return '<span class="av" style="width:'+s+'px;height:'+s+'px">'+o+'</span>'}
+function rav(){return{b:ri(0,7),k:ri(0,5),h:ri(0,5),hc:ri(0,6),m:ri(0,3),x:ri(0,3)}}
+var K="satzap_v1",app=document.getElementById("app"),L="ABCD",R=null,V="intro",TAB="p",ED=null,STEP=0,LG=null,D=ld(),U=null;
+function ld(){try{var r=localStorage.getItem(K);if(r){var o=JSON.parse(r);if(o&&o.users)return o}}catch(e){}return{users:{},cur:null}}
+function sv(){try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}}
+function hp(s){var h=5381;for(var i=0;i<s.length;i++)h=(h*33+s.charCodeAt(i))>>>0;return h}
+function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function us(){return Object.keys(D.users).map(function(k){var u=D.users[k];u.id=k;return u})}
+function rank(){return us().sort(function(a,b){return b.pts-a.pts||b.total-a.total})}
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function sh(x){var ix=shuf([0,1,2,3]);return{t:x.t,q:x.q,o:ix.map(function(k){return x.o[k]}),a:ix.indexOf(x.a),e:x.e}}
+function fresh(m,seen){var it,n=0;do{it=TP[m][3]()}while(seen[it.q]&&n++<30);seen[it.q]=1;return sh(it)}
+function isSaved(c){return U.saved.some(function(w){return w.q===c.q})}
+function addSaved(c){if(!isSaved(c)){U.saved.push({t:c.t,q:c.q,o:c.o,a:c.a,e:c.e});if(U.saved.length>200)U.saved.shift()}}
+function delSaved(c){U.saved=U.saved.filter(function(w){return w.q!==c.q})}
+function dst(){var t=new Date().toDateString(),y=new Date(Date.now()-864e5).toDateString();return U.td===t||U.td===y?(U.ds||0):0}
+function tick(){var t=new Date().toDateString();if(U.td!==t){var y=new Date(Date.now()-864e5).toDateString();U.ds=U.td===y?(U.ds||0)+1:1;U.td=t;U.tc=0;if(U.ds>(U.bds||0))U.bds=U.ds}U.tc=(U.tc||0)+1;if(U.tc===10&&U.gd!==t){U.gd=t;U.pts+=50;R.pts+=50;return 1}return 0}
+function goalCard(){var tc=U.td===new Date().toDateString()?(U.tc||0):0;return '<div class="goal"><div class="gt"><b>🔥 '+dst()+' day streak</b><span>Daily goal: '+Math.min(tc,10)+'/10 '+(tc>=10?'🎉':'')+'</span></div><div class="bar"><i style="width:'+Math.min(tc,10)*10+'%"></i></div></div>'}
+function badges(){var B=[['🌱','First steps',U.total>=1],['🎯','10 correct',U.total>=10],['💯','100 correct',U.total>=100],['🔥','5 in a row',U.streak>=5],['⚡','10 in a row',U.streak>=10],['⭐','10 stars',U.stars>=10],['📅','3-day streak',(U.bds||0)>=3],['🏆','7-day streak',(U.bds||0)>=7]];return '<h2>Badges</h2><div class="badges">'+B.map(function(b){return '<div class="bd'+(b[2]?'':' off')+'"><i>'+b[0]+'</i>'+b[1]+'</div>'}).join('')+'</div>'}
+function lvl(u){return 1+Math.floor(u.pts/200)}
+function tabs(){return '<div class="tabs">'+[["p","🎯","Play"],["b","🏆","Board"],["m","👤","Me"]].map(function(t){return '<button data-a="tab" data-v="'+t[0]+'" class="'+(TAB===t[0]?"on":"")+'"><i>'+t[1]+'</i>'+t[2]+'</button>'}).join("")+'</div><div style="height:78px"></div>'}
+function rd(){var n=document.getElementById("nn"),p=document.getElementById("pn");if(ED&&n)ED.n=n.value;if(ED&&p)ED.pin=p.value}
+function render(){var h="";
+if(V==="intro"){var seeds=[{b:0,k:1,h:1,hc:1,m:0,x:0},{b:4,k:3,h:2,hc:0,m:1,x:1},{b:2,k:0,h:3,hc:3,m:0,x:0},{b:1,k:4,h:0,hc:0,m:2,x:2},{b:3,k:2,h:4,hc:5,m:0,x:3}];
+h='<div class="hero"><span class="logo">'+logo(92)+'</span><h1>SAT<b>zap</b></h1><p class="sub">Zap through SAT practice. Endless questions, streaks and a leaderboard to beat your friends.</p><div class="avrow">'+seeds.map(function(s){return av(s,54)}).join("")+'</div>'+
+'<button class="go" data-a="sign">Get started</button>'+(us().length?'<button class="go ghost" data-a="login">I already have a player</button>':'')+
+'<div class="feat"><div><i>♾️</i><b>Endless</b><span>Questions never run out</span></div><div><i>🔖</i><b>Save for later</b><span>Mistakes are kept for you</span></div><div><i>🏆</i><b>Leaderboard</b><span>See who is #1</span></div><div><i>📴</i><b>Works offline</b><span>Perfect for the commute</span></div></div><p class="note">Free. No email. Everything stays on this device.</p></div>'}
+else if(V==="login"){h='<button class="lk" data-a="intro">← Back</button><h1>Welcome <b>back</b></h1><p class="sub">Tap your player.</p><div class="ulist">'+rank().map(function(u){return '<button class="urow'+(LG===u.id?' sel':'')+'" data-a="pu" data-id="'+u.id+'">'+av(u.av,44)+'<b>'+esc(u.n)+'</b><small>⚡ '+u.pts+'</small></button>'}).join("")+'</div>'+
+(LG?'<label class="lab" for="pn">Enter your 4-digit PIN</label><input id="pn" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off"><button class="go" data-a="dol">Log in</button>':'')+'<p id="er" class="note" role="alert"></p><button class="go ghost" data-a="sign">+ New player</button>'}
+else if(V==="sign"){var e=ED.edit;h='<button class="lk" data-a="'+(e?"home":"intro")+'">← Back</button><h1>'+(e?'Edit <b>profile</b>':'Create your <b>player</b>')+'</h1><div class="center">'+av(ED.av,124)+'<div style="margin-top:8px"><button class="go sm ghost" data-a="rnd">🎲 Surprise me</button></div></div>';
+AO.forEach(function(g){h+='<div class="lab">'+g[1]+'</div><div class="sw">';var k=g[0],n=typeof g[2]==="number"?g[2]:g[2].length;
+for(var i=0;i<n;i++){var s=ED.av[k]===i?" sel":"";if(typeof g[2]==="number"){var t=JSON.parse(JSON.stringify(ED.av));t[k]=i;h+='<button class="a'+s+'" data-a="ao" data-k="'+k+'" data-v="'+i+'" aria-label="'+g[1]+' '+(i+1)+'">'+av(t,48)+'</button>'}else h+='<button class="c'+s+'" data-a="ao" data-k="'+k+'" data-v="'+i+'" style="background:'+g[2][i]+'" aria-label="'+g[1]+' '+(i+1)+'"></button>'}h+='</div>'});
+h+='<label class="lab" for="nn">Nickname</label><input id="nn" maxlength="14" autocomplete="off" placeholder="e.g. NileNinja" value="'+esc(ED.n)+'">'+(e?'':'<label class="lab" for="pn">Pick a 4-digit PIN</label><input id="pn" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="••••" value="'+esc(ED.pin||"")+'"><p class="note">Use a nickname, not your real name. The PIN only keeps other players out of your profile.</p>')+
+'<button class="go" data-a="'+(e?"sp":"cr")+'">'+(e?"Save changes":"Create player ⚡")+'</button><p id="er" class="note" role="alert"></p>'}
+else if(V==="ob"){var S=[["🎯","Pick a topic","Choose Math, Grammar, Vocabulary or anything else. Questions are made fresh every time and never run out."],["👆","Tap an answer","One tap per answer. You see why it is right straight away. 5 in a row earns a ⭐ bonus."],["🏆","Climb the board","Points go on the leaderboard. Play every day to build a streak, and your wrong answers are saved so you can review them later."]],s=S[STEP];
+h='<div class="ob"><div class="big">'+s[0]+'</div><h1>'+s[1]+'</h1><p class="sub">'+s[2]+'</p><div class="dots">'+S.map(function(x,i){return '<i class="'+(i===STEP?"on":"")+'"></i>'}).join("")+'</div><button class="go" data-a="obn">'+(STEP===2?"Let\u2019s zap! ⚡":"Next")+'</button>'+(STEP<2?'<button class="lk" data-a="obs" style="margin-top:10px">Skip</button>':'')+'</div>'}
+else if(V==="home"){var r=rank(),pos=r.findIndex(function(x){return x.id===U.id})+1;
+if(TAB==="p"){h='<div class="head">'+av(U.av,48)+'<h1>Hi, '+esc(U.n)+'!</h1><span class="chip">⚡ '+U.pts+'</span></div>'+goalCard()+
+(U.saved.length?'<button class="saved" data-a="go" data-m="w"><b style="font-size:1.6rem">🔖</b><div><strong>Review saved questions</strong><span>'+U.saved.length+' waiting. Get one right to clear it.</span></div></button>':'')+'<h2>Pick a topic</h2><div class="tiles">';
+for(var k in TP)h+='<button class="tile" data-a="go" data-m="'+k+'"><i>'+TP[k][1]+'</i><strong>'+TP[k][0]+'</strong><span>'+TP[k][2]+'</span></button>';h+='</div>'}
+else if(TAB==="b"){h='<h1>Leader<b>board</b></h1>'+(r.length>1?'<div class="crown">👑 '+esc(r[0].n)+' is #1 with '+r[0].pts+' points</div>':'<div class="crown">You are #1! Add a friend to compete 👇</div>')+'<div class="ulist">'+r.map(function(u,i){return '<div class="urow'+(u.id===U.id?' me':'')+'"><b style="flex:none;width:34px">'+(["🥇","🥈","🥉"][i]||"#"+(i+1))+'</b>'+av(u.av,44)+'<b>'+esc(u.n)+(u.id===U.id?' (you)':'')+'<br><small>Level '+lvl(u)+' · 🔥 '+u.streak+'</small></b><b>⚡ '+u.pts+'</b></div>'}).join("")+'</div><button class="go ghost" data-a="sign">+ Add a player on this phone</button><p class="note">Ranks everyone who plays on this device. Earn 10 points per correct answer and 20 for each ⭐.</p>'}
+else{var pr=(U.pts%200)/2;h='<div class="center">'+av(U.av,120)+'<h1 style="margin-top:10px">'+esc(U.n)+'</h1><p class="sub">Level '+lvl(U)+' · Rank #'+pos+'</p></div><div class="bar"><i style="width:'+pr+'%"></i></div><div class="barl"><span>'+U.pts+' points</span><span>'+(200-U.pts%200)+' to next level</span></div>'+
+'<div class="stats"><div class="stat"><b>'+U.total+'</b><span>correct answers</span></div><div class="stat"><b>🔥 '+U.streak+'</b><span>best streak</span></div><div class="stat"><b>⭐ '+U.stars+'</b><span>stars</span></div><div class="stat"><b>🔖 '+U.saved.length+'</b><span>saved</span></div></div>'+
+''+badges()+'<button class="go" data-a="edit">✏️ Edit profile</button><button class="go ghost" data-a="bug">🐞 Report a bug</button><button class="go ghost" data-a="sign">+ Add player</button><button class="go ghost" data-a="out">Switch player</button>'}
+h+=tabs()}
+else if(V==="game"){var c=R.list[R.i],p=R.pick,nm=R.m==="w"?"Saved":TP[R.m][0];
+h='<div class="top"><button class="lk" data-a="home">✕ Close</button><span>'+nm+' · ⭐ '+R.stars+'</span><button class="lk" data-a="fin">Finish</button></div><div class="bar" aria-hidden="true"><i style="width:'+((R.streak%5)*20)+'%"></i></div><div class="barl"><span>'+(R.en?'Question '+(R.i+1):(R.i+1)+' of '+R.list.length)+' · ✓ '+R.score+'</span><span>🔥 '+R.streak+' · 5 = ⭐</span></div>'+
+'<div class="card"><div class="crow"><span class="tag">'+(c.t==="m"?"Math":"Reading & Writing")+'</span><button class="bm'+(isSaved(c)?' on':'')+'" data-a="bm" aria-pressed="'+isSaved(c)+'">'+(isSaved(c)?'🔖 Saved':'🔖 Save for later')+'</button></div><div class="q">'+esc(c.q)+'</div></div>';
+c.o.forEach(function(o,k){var cl=p===null?"":k===c.a?" ok":k===p?" bad":" dim";h+='<button class="opt'+cl+'" data-a="pick" data-k="'+k+'"'+(p!==null?" disabled":"")+'><i>'+L[k]+'</i><span>'+esc(o)+'</span></button>'});
+if(p!==null){var ok=p===c.a,last=!R.en&&R.i===R.list.length-1;
+h+='<div class="fb '+(ok?"ok":"bad")+'" role="status"><strong>'+(ok?(R.streak%5===0?"⭐ Correct! +30 points":"✓ Correct! +10 points"):"✗ Not quite. The answer is "+L[c.a]+".")+'</strong><br>'+esc(c.e)+(!ok&&R.m!=="w"?'<small>🔖 Saved for later</small>':ok&&R.m==="w"?'<small>✅ Cleared from saved</small>':'')+(R.goal?'<small>🎉 Daily goal done! +50 points</small>':'')+'<small><button class="lk" data-a="bug" data-q="1" style="min-height:32px">🐞 Report this question</button></small></div><button class="go" data-a="next">'+(last?"See result":"Next →")+'</button>'}}
+else if(V==="done"){var r2=rank(),n=R.n,pc=n?R.score/n:0;
+h='<div class="center">'+av(U.av,96)+'<h1 style="margin-top:10px">Nice <b>zap!</b></h1><div class="bigs">'+R.score+'/'+n+'</div><p class="sub">'+(n===0?"See you next time!":pc>=.9?"Outstanding!":pc>=.6?"Great work!":"Keep going. Every round helps.")+'<br>⚡ +'+R.pts+' points · you are #'+(r2.findIndex(function(x){return x.id===U.id})+1)+' on the board'+(U.saved.length?'<br>🔖 '+U.saved.length+' saved to review':'')+'</p></div><button class="go" data-a="go" data-m="'+R.m+'">Play again</button>'+(U.saved.length&&R.m!=="w"?'<button class="go ghost" data-a="go" data-m="w">🔖 Review saved</button>':'')+'<button class="go ghost" data-a="share" data-s="r">📤 Share my score</button><button class="go ghost" data-a="home">Home</button>'}
+app.innerHTML=h;window.scrollTo(0,0)}
+function enter(id){D.cur=id;U=D.users[id];sv()}
+app.addEventListener("click",function(e){
+var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a,er=function(t){var x=document.getElementById("er");if(x)x.textContent=t};
+if(a==="share"){var me=b.dataset.s==="me",t=me?"I have "+U.pts+" points (Level "+lvl(U)+") on SATzap ⚡ Can you beat me?":"I scored "+R.score+"/"+R.n+" on SATzap ⚡ Can you beat me?",u=location.href.indexOf("http")===0?location.href:"";
+if(navigator.share){navigator.share({title:"SATzap",text:t,url:u}).catch(function(){})}
+else{var x=t+(u?" "+u:"");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(function(){b.textContent="✅ Copied! Paste it in a chat"})}else{window.prompt("Copy this and send it:",x)}}}
+else if(a==="bug"){var cx="";if(b.dataset.q&&R){var cq=R.list[R.i];cx="\n\nQuestion:\n"+cq.q+"\nOptions: "+cq.o.join(" | ")+"\nMarked correct: "+L[cq.a]+"\nExplanation: "+cq.e}location.href="mailto:mazenshahin639@gmail.com?subject="+encodeURIComponent("SATzap bug report")+"&body="+encodeURIComponent("Describe the problem:\n\n\n---"+cx+"\nDevice: "+navigator.userAgent)}
+else if(a==="intro"){V="intro";render()}
+else if(a==="sign"){ED={av:rav(),n:"",pin:"",edit:false};V="sign";render()}
+else if(a==="login"){V="login";LG=null;render()}
+else if(a==="pu"){LG=b.dataset.id;render()}
+else if(a==="dol"){var p=document.getElementById("pn").value;if(D.users[LG].pin!==hp(p)){er("Wrong PIN. Try again.");return}enter(LG);V="home";TAB="p";render()}
+else if(a==="ao"){rd();ED.av[b.dataset.k]=+b.dataset.v;render()}
+else if(a==="rnd"){rd();ED.av=rav();render()}
+else if(a==="cr"){rd();var n=ED.n.trim();if(n.length<2)return er("Type a nickname with at least 2 letters.");if(!/^\d{4}$/.test(ED.pin))return er("The PIN must be 4 numbers.");
+if(us().some(function(u){return u.n.toLowerCase()===n.toLowerCase()}))return er("That nickname is taken. Try another.");
+var id="u"+Date.now().toString(36)+ri(0,99);D.users[id]={n:n,pin:hp(ED.pin),av:ED.av,pts:0,total:0,streak:0,stars:0,saved:[]};enter(id);V="ob";STEP=0;render()}
+else if(a==="sp"){rd();var n2=ED.n.trim();if(n2.length<2)return er("Type a nickname with at least 2 letters.");
+if(us().some(function(u){return u.id!==U.id&&u.n.toLowerCase()===n2.toLowerCase()}))return er("That nickname is taken.");U.n=n2;U.av=ED.av;sv();V="home";TAB="m";render()}
+else if(a==="edit"){ED={av:JSON.parse(JSON.stringify(U.av)),n:U.n,edit:true};V="sign";render()}
+else if(a==="obn"){if(STEP<2){STEP++;render()}else{V="home";TAB="p";render()}}
+else if(a==="obs"){V="home";TAB="p";render()}
+else if(a==="tab"){TAB=b.dataset.v;render()}
+else if(a==="home"){V="home";render()}
+else if(a==="out"){D.cur=null;sv();V=us().length?"login":"intro";LG=null;render()}
+else if(a==="go"){var m=b.dataset.m,list=m==="w"?shuf(U.saved).slice(0,10).map(sh):[];if(m==="w"&&!list.length){V="home";render();return}
+R={m:m,en:m!=="w",list:list,seen:{},i:0,n:0,score:0,streak:0,stars:0,pts:0,pick:null};if(R.en)list.push(fresh(m,R.seen));V="game";render()}
+else if(a==="fin"){V="done";sv();render()}
+else if(a==="bm"){var c=R.list[R.i];if(isSaved(c))delSaved(c);else addSaved(c);sv();render()}
+else if(a==="pick"&&R&&R.pick===null){var k=+b.dataset.k,c2=R.list[R.i],ok=k===c2.a;R.pick=k;R.n++;R.goal=tick();
+if(ok){R.score++;U.total++;R.streak++;R.pts+=10;U.pts+=10;if(R.streak>U.streak)U.streak=R.streak;if(R.streak%5===0){R.stars++;U.stars++;R.pts+=20;U.pts+=20}if(R.m==="w")delSaved(c2)}
+else{R.streak=0;if(R.m!=="w")addSaved(c2)}sv();render()}
+else if(a==="next"){if(!R.en&&R.i===R.list.length-1){V="done";sv();render()}else{R.i++;R.pick=null;if(R.en)R.list.push(fresh(R.m,R.seen));render()}}
+});
+if(D.cur&&D.users[D.cur]){U=D.users[D.cur];V="home"}
+render();
+</script>
+</body>
+</html>
